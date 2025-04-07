@@ -1,4 +1,4 @@
-#include "all.h"
+#include "ui.h"
 
 #include "pattern_editor.h"
 #include "title_header.h"
@@ -6,7 +6,7 @@
 
 #include "../settings.h"
 
-void bt_render_all(
+void bt_render_ui(
         int x,
         int y,
         int w,

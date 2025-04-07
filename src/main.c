@@ -1,6 +1,6 @@
 #include "includes.h"
 
-#include "renderers/all.h"
+#include "ui/ui.h"
 #include "settings.h"
 #include "logging.h"
 #include "utils.h"
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
             global_settings.render_state.title_header = false;
         }
 
-        bt_render_all(0, 0, global_settings.window.x, global_settings.window.y);
+        bt_render_ui(0, 0, global_settings.window.x, global_settings.window.y);
     
     }
     return 0;

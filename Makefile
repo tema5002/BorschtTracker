@@ -7,7 +7,7 @@ TARGET = program
 
 LDFLAGS = -O3
 
-SRCS = $(shell find src -type f -name '*.c')
+SRCS = $(shell find $(SRC_DIR) -type f -name '*.c')
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 all: $(TARGET)
