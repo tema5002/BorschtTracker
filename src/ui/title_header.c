@@ -19,43 +19,13 @@ void bt_render_title_header(
     char system_time[20];
     get_system_time(system_time);
 
-    //const int name_length = CONST_STRLEN(PROGRAM_NAME_FULL);
-    //const int file_length = strlen(filename);
-    //const int time_length = CONST_STRLEN(system_time);
-/*
-    const int file_start = (w - file_length) / 2 - name_length - left_right_padding;
-    const int time_start = w - left_right_padding - name_length - file_start - file_length - time_length - left_right_padding;
-*/
-
     MOVE_CURSOR(x, y);
     printf("\e[30m\e[46m");
-/*
-    //const int total_length = name_length + file_length + time_length + 4;
-    int left_right_padding = w / 60;
-    if (left_right_padding > 2) left_right_padding = 2;
-
-    //const int file_start = left_right_padding + name_length + 1; // 1 for space
-    //const int time_start = w - time_length - left_right_padding; // Position for time
-
-    PRINT_SPACES(left_right_padding);
-    fputs(PROGRAM_NAME_FULL, stdout);
-
-    // Move cursor to the file start position
-    //MOVE_CURSOR(x + file_start, y);
-    //fputs(filename, stdout);
-
-    // Move cursor to the time start position
-    //MOVE_CURSOR(x + time_start, y);
-    //fputs(system_time, stdout);*/
-
 
     const int name_length = CONST_STRLEN(PROGRAM_NAME_FULL);
     const int file_length = strlen(filename);
     const int time_length = CONST_STRLEN(system_time);
-
     const int total_length = name_length + file_length + time_length;
-
-    MOVE_CURSOR(x, y);
 
     if (total_length + 2 > w) {
         if (name_length + file_length + 1 > w) {
