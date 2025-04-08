@@ -18,20 +18,18 @@ int main(int argc, char* argv[]) {
     time_t last_second = 0;
 
     while (1) {
+        struct timeval timeout = {
+            .tv_sec = 0,
+            .tv_usec = 1000000 - time(NULL) % 1 * 1000000
+        };
+
         fd_set readfds;
         FD_ZERO(&readfds);
         FD_SET(STDIN_FILENO, &readfds);
 
-        time_t now = time(NULL);
-        long wait_time = 1000000 - now % 1 * 1000000;
-        
-        struct timeval timeout;
-        timeout.tv_sec = 0;
-        timeout.tv_usec = wait_time;
-
         select(STDIN_FILENO + 1, &readfds, NULL, NULL, &timeout);
 
-        now = time(NULL);
+        time_t now = time(NULL);
         
         if (now > last_second) {
             last_second = now;

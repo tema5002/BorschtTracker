@@ -7,10 +7,10 @@
 #include "../settings.h"
 
 void bt_render_ui(
-        int x,
-        int y,
-        int w,
-        int h
+        const int x,
+        const int y,
+        const int w,
+        const int h
 ) {
     BT_RENDER_IF(global_settings.render_state.title_header, bt_render_title_header(x, y, w));
     BT_RENDER_IF(global_settings.render_state.shortcuts, bt_render_shortcuts(x, h - 2, w));
