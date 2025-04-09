@@ -46,9 +46,8 @@ void bt_render_title_header(
         int left_right_padding = (w - total_length) / 16;
         if (left_right_padding > 2) left_right_padding = 2;
 
-        const int padding = (w - left_right_padding - total_length) / 2;
+        const int padding = (w - left_right_padding * 2 - total_length) / 2;
 
-        MOVE_CURSOR(x, y);
         PRINT_SPACES(left_right_padding);
         fputs(PROGRAM_NAME_FULL, stdout);
         PRINT_SPACES(padding);
