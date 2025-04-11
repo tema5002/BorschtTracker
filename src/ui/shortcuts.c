@@ -48,7 +48,7 @@ void bt_render_shortcuts(
         if (current_x + BT_SHORTCUT_WIDTH > w) {
             current_x = x;
             current_y++;
-            if (current_y > h + y) return;
+            if (current_y >= h + y) return;
             move(current_y, current_x);
         }
 
@@ -58,6 +58,6 @@ void bt_render_shortcuts(
         printw(" %s", bt_shortcuts[s].description);
         PRINT_SPACES(space_between);
 
-        current_x += BT_SHORTCUT_WIDTH + space_between; // Add distributed spacing
+        current_x += BT_SHORTCUT_WIDTH + space_between;
     }
 }
