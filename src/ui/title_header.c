@@ -19,11 +19,11 @@ void bt_render_title_header(
     char system_time[20];
     get_system_time(system_time);
 
-    MOVE_CURSOR(x, y);
-    printf("\e[30m\e[46m");
+    move(y, x);
+    attron(COLOR_PAIR(1));
 
     const int name_length = CONST_STRLEN(PROGRAM_NAME_FULL);
-    const int file_length = strlen(filename);
+    const int file_length = (int)strlen(filename);
     const int time_length = CONST_STRLEN(system_time);
     const int total_length = name_length + file_length + time_length;
 
@@ -32,14 +32,14 @@ void bt_render_title_header(
             // only print the program name
             const int padding = (w - name_length) / 2;
             PRINT_SPACES(padding);
-            fputs(PROGRAM_NAME_FULL, stdout);
+            printw("%s", PROGRAM_NAME_FULL);
             PRINT_SPACES(padding);
         }
         else {
             // print program name and filename
-            fputs(PROGRAM_NAME_FULL, stdout);
+            printw("%s", PROGRAM_NAME_FULL);
             PRINT_SPACES(w - name_length - file_length);
-            fputs(filename, stdout);
+            printw("%s", filename);
         }
     }
     else {
@@ -49,14 +49,13 @@ void bt_render_title_header(
         const int padding = (w - left_right_padding * 2 - total_length) / 2;
 
         PRINT_SPACES(left_right_padding);
-        fputs(PROGRAM_NAME_FULL, stdout);
+        printw("%s", PROGRAM_NAME_FULL);
         PRINT_SPACES(padding);
-        fputs(filename, stdout);
+        printw("%s", filename);
         PRINT_SPACES(padding);
-        fputs(system_time, stdout);
+        printw("%s", system_time);
         PRINT_SPACES(left_right_padding);
     }
 
-    printf("\e[m");
-    fflush(stdout);
+    attroff(COLOR_PAIR(1));
 }

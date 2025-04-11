@@ -1,21 +1,7 @@
 #include "terminal.h"
 
 #include "logging.h"
-
-void bt_get_terminal_size(int* width, int* height) {
-    struct winsize ws;
-
-    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1) {
-        bt_log(BT_LOG_ERROR, "Error getting terminal size. Using fallback values.");
-        *width = 80;
-        *height = 24;
-    }
-    else {
-        *width = ws.ws_col;
-        *height = ws.ws_row;
-    }
-    bt_log(BT_LOG_DEBUG, "New terminal size: %dx%d", *width, *height);
-}
+#include "utils.h"
 
 void register_resize_handler(const __sighandler_t callback) {
     struct sigaction sa;

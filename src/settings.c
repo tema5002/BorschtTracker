@@ -2,16 +2,15 @@
 
 #include "terminal.h"
 #include "logging.h"
-#include "utils.h"
 
 struct bt_settings_t global_settings = {};
 
 void bt_update_terminal_size() {
-    bt_get_terminal_size(
-        &global_settings.window.x,
-        &global_settings.window.y
-    );
-    CLEAR_SCREEN();
+    endwin();
+    clear();
+    refresh();
+    initscr();
+    bt_log(BT_LOG_DEBUG, "New terminal size: %dx%d", COLS, LINES);
     BT_RESET_RENDER_STATE();
 }
 
@@ -22,6 +21,7 @@ void handle_resizing(const int _) {
 }
 
 void bt_initialize_settings() {
+    global_settings.start_time = time(NULL);
     register_resize_handler(handle_resizing);
 
     bt_update_terminal_size();

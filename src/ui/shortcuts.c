@@ -1,53 +1,63 @@
 #include "shortcuts.h"
 
-struct bt_shortcut bt_shortcuts[] = {
-    {"^C", "copy idk   "},
-    {"^P", "placeholder"},
-    {"^C", "copy idk   "},
-    {"^C", "copy idk   "},
-    {"^C", "copy idk   "},
-    {"^C", "copy idk   "},
-    {"^C", "copy idk   "},
-    {"^C", "copy idk   "},
-    {"^C", "copy idk   "},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
-    {"^P", "placeholder"},
+#include "../init.h"
+
+struct bt_shortcut_t bt_shortcuts[] = {
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
+    {"^P", "placeholder     "},
 };
 
 void bt_render_shortcuts(
-        int x,
-        int y,
-        int w
-        // height is always 2
+        const int x,
+        const int y,
+        const int w,
+        const int h
 ) {
-    int current_width = 0;
-    bool second = false;
+    int current_y = y;
+    int current_x = x;
 
-    MOVE_CURSOR(x, y);
+    move(current_y, current_x);
+
+    const int shortcuts_count = w / BT_SHORTCUT_WIDTH;
+    const int extra_space = w - shortcuts_count * BT_SHORTCUT_WIDTH;
+    const int space_between = shortcuts_count > 1 ? extra_space / (shortcuts_count - 1) : extra_space;
+
     for (int s = 0; s < BT_SHORTCUTS_AMOUNT; s++) {
-        if (current_width + BT_SHORTCUT_WIDTH > w) {
-            current_width = 0;
-            y++;
-            if (second) return;
-            else second = true;
-            MOVE_CURSOR(x, y);
+        if (current_x + BT_SHORTCUT_WIDTH > w) {
+            current_x = x;
+            current_y++;
+            if (current_y > h + y) return;
+            move(current_y, current_x);
         }
-        printf("\e[0;7m%s\e[m %s", bt_shortcuts[s].key, bt_shortcuts[s].description);
-        fflush(stdout);
-        PRINT_SPACES(BT_SHORTCUTS_PADDING);
-        current_width += BT_SHORTCUT_WIDTH;
+
+        attron(COLOR_PAIR(BT_COLOR_PAIR_SHORTCUTS));
+        printw("%s", bt_shortcuts[s].key);
+        attroff(COLOR_PAIR(BT_COLOR_PAIR_SHORTCUTS));
+        printw(" %s", bt_shortcuts[s].description);
+        PRINT_SPACES(space_between);
+
+        current_x += BT_SHORTCUT_WIDTH + space_between; // Add distributed spacing
     }
 }

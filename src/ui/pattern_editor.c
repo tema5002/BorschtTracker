@@ -3,28 +3,25 @@
 #include "../utils.h"
 
 void bt_render_pattern_editor(
-        int x,
-        int y,
-        int w,
-        int h
+        const int x,
+        const int y,
+        const int w,
+        const int h
 ) {
     for (int j = y; j < h; j++) {
-        MOVE_CURSOR(x, j);
+        move(j, x);
         for (int i = x; i < w; i++) {
             if (i == x ||
                 j == y ||
                 i == w - 1 ||
                 j == h - 1
             ) {
-                printf("O");
+                printw("O");
             }
             else {
-                printf("-");
+                printw("-");
             }
         }
-        fflush(stdout);
     }
-    MOVE_CURSOR(x + 2, y + 2);
-    fputs("pattern editror", stdout);
-    fflush(stdout);
+    mvprintw(y + 2, x + 2, "pattern editror");
 }

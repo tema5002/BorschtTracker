@@ -9,5 +9,9 @@
 #include <stdint.h>
 #include <signal.h>
 #include <stdarg.h>
+#include <locale.h>
+#include <termios.h>
 #include <sys/ioctl.h>
 #include <sys/select.h>
+
+#include <ncurses.h>

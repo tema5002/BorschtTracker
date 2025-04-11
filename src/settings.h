@@ -1,12 +1,11 @@
 #pragma once
 #include "includes.h"
-#include "utils.h"
 
 #include "logging.h"
 #include "modules/bt_module.h"
 
 struct bt_settings_t {
-    bt_vector2 window; // vector because why not
+    time_t start_time;
 
     int volume;
     int sample_rate;
