@@ -17,7 +17,7 @@ void bt_main_initialize() {
     cbreak();
     noecho();
     curs_set(0);
-    //keypad(stdscr, TRUE);
+    keypad(stdscr, TRUE);
     atexit(bt_stop_execution);
 
     //setlocale(LC_ALL, "");

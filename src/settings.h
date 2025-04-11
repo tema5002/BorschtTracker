@@ -30,5 +30,4 @@ struct bt_settings_t {
 
 extern struct bt_settings_t global_settings;
 
-void bt_update_terminal_size();
 void bt_initialize_settings();
