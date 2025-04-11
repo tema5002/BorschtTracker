@@ -4,6 +4,7 @@
 
 void bt_stop_execution() {
     endwin();
+    exit(EXIT_SUCCESS);
 }
 
 void bt_main_initialize() {
@@ -18,7 +19,6 @@ void bt_main_initialize() {
     noecho();
     curs_set(0);
     keypad(stdscr, TRUE);
-    atexit(bt_stop_execution);
 
     //setlocale(LC_ALL, "");
     bt_initialize_settings();

@@ -7,12 +7,12 @@
 #include "init.h"
 
 int main(int argc, char* argv[]) {
+    bt_main_initialize();
+
     bt_log(BT_LOG_DEBUG, "Starting BorschtTracker");
     for (int i = 0; i < argc; i++) {
     	bt_log(BT_LOG_DEBUG, "argv[%i] = %s\n", i, argv[i]);
     }
-
-    bt_main_initialize();
 
     time_t last_second = 0;
 
@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
     while (true) {
         packed_string_t input;
         handle_input(&input);
+        if (input == BT_PACK_STRING_CHAR('q')) bt_stop_execution();
 
         const time_t now = time(NULL);
         if (now > last_second) {

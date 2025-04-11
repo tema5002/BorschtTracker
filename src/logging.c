@@ -25,6 +25,8 @@ void bt_log(bt_log_level log_level, const char* format, ...) {
     va_list args;
     va_start(args, format);
 
+    if (log_level == BT_LOG_FATAL) endwin();
+
     fprintf(stderr, "%s", bt_log_level_color[log_level]);
     fprintf(stderr, "[%s] ", bt_log_level_str[log_level]);
     vfprintf(stderr, format, args);
